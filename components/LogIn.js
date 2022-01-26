@@ -16,11 +16,6 @@ export default LogIn;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		textAlign: 'center',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: '100%',
-		width: '100%',
 		// marginTop: Platform.OS === 'android' && 40,
 	},
 });
