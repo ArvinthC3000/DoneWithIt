@@ -1,64 +1,29 @@
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Home from './components/Home';
 import { NavigationContainer } from '@react-navigation/native';
-import { useState } from 'react';
-import {
-	StyleSheet,
-	Text,
-	View,
-	SafeAreaView,
-	FlatList,
-	Alert,
-	// Platform,
-	// Dimensions,
-	// Image,
-} from 'react-native';
-import uuidv4 from 'uuidv4';
-import AddItem from './components/AddItem';
-import Header from './components/Header';
-import ListItem from './components/ListItem';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { enableScreens } from 'react-native-screens';
+import LogIn from './components/LogIn';
 
 export default function App() {
-	const [items, setItems] = useState([
-		{ id: uuidv4(), text: 'User 1' },
-		{ id: uuidv4(), text: 'User 2' },
-		{ id: uuidv4(), text: 'User 3' },
-		{ id: uuidv4(), text: 'User 4' },
-		{ id: uuidv4(), text: 'User 5' },
-	]);
-	// console.log(Dimensions.get('screen'));
-
-	const deleteItem = (id) => {
-		setItems((prev) => prev.filter((item) => item.id !== id));
-	};
-
-	const addItem = (text) => {
-		console.log(text);
-		if (!text) {
-			Alert.alert('Error', 'Please enter an item', [{ text: 'Close' }]);
-			return;
-		}
-		setItems((prev) => [...prev, { id: uuidv4(), text }]);
-	};
+	enableScreens();
+	const Stack = createNativeStackNavigator();
 
 	return (
 		<NavigationContainer>
-			<SafeAreaView>
-				<View style={styles.container}>
-					<Header title='Flat List' />
-					<AddItem addItem={addItem} />
-					<FlatList
-						data={items}
-						renderItem={({ item }) => (
-							<ListItem item={item} deleteItem={deleteItem} />
-						)}
-					/>
-				</View>
-			</SafeAreaView>
+			<Stack.Navigator>
+				<Stack.Screen
+					name='Log In'
+					options={{ title: 'Log In' }}
+					component={LogIn}
+				/>
+				<Stack.Screen
+					name='Home'
+					options={{ title: 'List page' }}
+					component={Home}
+				/>
+			</Stack.Navigator>
 		</NavigationContainer>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		marginTop: Platform.OS === 'android' && 40,
-	},
-});
