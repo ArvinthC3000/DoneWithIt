@@ -5,6 +5,7 @@ import {
 	View,
 	SafeAreaView,
 	FlatList,
+	Alert,
 	// Platform,
 	// Dimensions,
 	// Image,
@@ -28,11 +29,20 @@ export default function App() {
 		setItems((prev) => prev.filter((item) => item.id !== id));
 	};
 
+	const addItem = (text) => {
+		console.log(text);
+		if (!text) {
+			Alert.alert('Error', 'Please enter an item', [{ text: 'Close' }]);
+			return;
+		}
+		setItems((prev) => [...prev, { id: uuidv4(), text }]);
+	};
+
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
 				<Header title='Flat List' />
-				<AddItem />
+				<AddItem addItem={addItem} />
 				<FlatList
 					data={items}
 					renderItem={({ item }) => (
