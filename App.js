@@ -1,31 +1,47 @@
 // import { StatusBar } from 'expo-status-bar';
-// import { useState } from 'react';
+import { useState } from 'react';
 import {
 	StyleSheet,
-	// Text,
+	Text,
 	View,
 	SafeAreaView,
+	FlatList,
 	// Platform,
 	// Dimensions,
 	// Image,
 } from 'react-native';
-// import { uuid } from 'uuidv4';
+import uuidv4 from 'uuidv4';
 import Header from './components/Header';
+import ListItem from './components/ListItem';
 
 export default function App() {
-	// const [items, setItems] = useState([{ id: uuid }]);
+	const [items, setItems] = useState([
+		{ id: uuidv4(), text: 'User 1' },
+		{ id: uuidv4(), text: 'User 2' },
+		{ id: uuidv4(), text: 'User 3' },
+		{ id: uuidv4(), text: 'User 4' },
+		{ id: uuidv4(), text: 'User 5' },
+	]);
 	// console.log(Dimensions.get('screen'));
+
+	const deleteItem = (id) => {
+		setItems((prev) => prev.filter((item) => item.id !== id));
+	};
+
 	return (
 		<SafeAreaView>
 			<View
 				style={{
-					// backgroundColor: 'dodgerblue',
-					// width: '100%',
-					// height: '30%',
 					marginTop: 40,
 				}}
 			>
 				<Header title='Flat List' />
+				<FlatList
+					data={items}
+					renderItem={({ item }) => (
+						<ListItem item={item} deleteItem={deleteItem} />
+					)}
+				/>
 			</View>
 		</SafeAreaView>
 	);
