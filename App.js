@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import {
 	StyleSheet,
@@ -39,18 +40,20 @@ export default function App() {
 	};
 
 	return (
-		<SafeAreaView>
-			<View style={styles.container}>
-				<Header title='Flat List' />
-				<AddItem addItem={addItem} />
-				<FlatList
-					data={items}
-					renderItem={({ item }) => (
-						<ListItem item={item} deleteItem={deleteItem} />
-					)}
-				/>
-			</View>
-		</SafeAreaView>
+		<NavigationContainer>
+			<SafeAreaView>
+				<View style={styles.container}>
+					<Header title='Flat List' />
+					<AddItem addItem={addItem} />
+					<FlatList
+						data={items}
+						renderItem={({ item }) => (
+							<ListItem item={item} deleteItem={deleteItem} />
+						)}
+					/>
+				</View>
+			</SafeAreaView>
+		</NavigationContainer>
 	);
 }
 
