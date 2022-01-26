@@ -1,4 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
 	StyleSheet,
@@ -11,6 +10,7 @@ import {
 	// Image,
 } from 'react-native';
 import uuidv4 from 'uuidv4';
+import AddItem from './components/AddItem';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
 
@@ -30,12 +30,9 @@ export default function App() {
 
 	return (
 		<SafeAreaView>
-			<View
-				style={{
-					marginTop: 40,
-				}}
-			>
+			<View style={styles.container}>
 				<Header title='Flat List' />
+				<AddItem />
 				<FlatList
 					data={items}
 					renderItem={({ item }) => (
@@ -49,12 +46,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		// marginTop: Platform.OS === 'android' && 40,
-		// backgroundColor: '#fff',
-		// alignItems: 'center',
-		// justifyContent: 'center',
+		marginTop: Platform.OS === 'android' && 40,
 	},
 });
-
-// export default App;
