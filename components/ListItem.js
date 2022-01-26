@@ -6,7 +6,7 @@ const ListItem = ({ item, deleteItem }) => {
 	return (
 		<TouchableOpacity style={styles.listItem}>
 			<View style={styles.listItemView}>
-				<Text style={styles.listItemText}>{item.text}</Text>
+				<Text style={styles.listItemText}>{item.service_name}</Text>
 				<FontAwesome
 					name='remove'
 					size={20}
